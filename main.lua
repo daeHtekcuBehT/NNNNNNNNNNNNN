@@ -930,4 +930,15 @@ MakeDrag(G2L["3"])   -- Dungeon
 MakeDrag(G2L["21"])  -- Combat
 MakeDrag(G2L["49"])  -- Others
 
+
+
+queueteleport = missing("function",queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport))
+if queueteleport then
+    queueteleport([[
+        loadstring(game:HttpGet("https://github.com/daeHtekcuBehT/NNNNNNNNNNNNN/blob/main/main.lua"))()
+    ]])
+
+end
+
+
 return G2L["1"]
