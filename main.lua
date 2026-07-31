@@ -1,4 +1,9 @@
 
+
+pcall(function() getgenv().IY_LOADED = true end)
+if not game:IsLoaded() then game.Loaded:Wait() end
+
+
 local G2L = {}
 
 -- ─── ScreenGui ────────────────────────────────────────────────────────────────
