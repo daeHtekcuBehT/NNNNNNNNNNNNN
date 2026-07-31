@@ -935,20 +935,21 @@ MakeDrag(G2L["21"])  -- Combat
 MakeDrag(G2L["49"])  -- Others
 
 
-local queueteleport = 
+local queueteleport =
     type(queue_on_teleport) == "function" and queue_on_teleport
     or (syn and type(syn.queue_on_teleport) == "function" and syn.queue_on_teleport)
     or (fluxus and type(fluxus.queue_on_teleport) == "function" and fluxus.queue_on_teleport)
-    or nil
 
 local TeleportCheck = false
-game.Players.LocalPlayer.OnTeleport:Connect(function(State)
-	if (not TeleportCheck) and queueteleport then
-		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/daeHtekcuBehT/NNNNNNNNNNNNN/refs/heads/main/main.lua'))()")
-	end
-end)
 
+game.Players.LocalPlayer.OnTeleport:Connect(function(State)
+    if (not TeleportCheck) and queueteleport then
+        TeleportCheck = true
+        queueteleport([[
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/daeHtekcuBehT/NNNNNNNNNNNNN/refs/heads/main/main.lua"))()
+        ]])
+    end
+end)
 
 if queueteleport then
     queueteleport([[
