@@ -935,7 +935,7 @@ MakeDrag(G2L["49"])  -- Others
 queueteleport = missing("function",queue_on_teleport or (syn and syn.queue_on_teleport) or (fluxus and fluxus.queue_on_teleport))
 if queueteleport then
     queueteleport([[
-        loadstring(game:HttpGet("https://github.com/daeHtekcuBehT/NNNNNNNNNNNNN/blob/main/main.lua"))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/daeHtekcuBehT/NNNNNNNNNNNNN/refs/heads/main/main.lua"))()
     ]])
 
 end
