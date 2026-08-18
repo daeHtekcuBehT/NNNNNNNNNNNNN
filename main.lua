@@ -689,7 +689,7 @@ local function C_2()
 
 	local function hookTriggers(dungeon)
 		for _, obj in ipairs(dungeon:GetDescendants()) do
-			if obj:IsA("BasePart") then [obj.Name] = obj end
+			if obj:IsA("BasePart") then triggerParts[obj.Name] = obj end
 		end
 		dungeon.DescendantAdded:Connect(function(obj)
 			if obj:IsA("BasePart") then triggerParts[obj.Name] = obj end
@@ -750,9 +750,7 @@ local function C_2()
 				currentStep     = step + 1
 				nextTriggerTime = now + 1
 			elseif currentStep > #triggerOrder then
-				currentStep     = 1
-				nextTriggerTime = now + 1
-			else
+				triggerBoss     = triggerParts[triggerOrder[1]]
 				currentStep     = 1
 				nextTriggerTime = now + 1
 			end
