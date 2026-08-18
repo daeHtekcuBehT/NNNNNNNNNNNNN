@@ -689,7 +689,7 @@ local function C_2()
 
 	local function hookTriggers(dungeon)
 		for _, obj in ipairs(dungeon:GetDescendants()) do
-			if obj:IsA("BasePart") then triggerParts[obj.Name] = obj end
+			if obj:IsA("BasePart") then [obj.Name] = obj end
 		end
 		dungeon.DescendantAdded:Connect(function(obj)
 			if obj:IsA("BasePart") then triggerParts[obj.Name] = obj end
@@ -740,19 +740,27 @@ local function C_2()
 			end
 
 			-- Step the trigger queue
-			local now  = tick()
+			local now = tick()
+
+			-- wrap the cursor if we've run off the end
+			if currentStep > #triggerOrder then
+				currentStep = 1
+			end
+
+			-- find the next valid (non-nil) entry, wrapping around if needed
 			local step = currentStep
-			while step <= #triggerOrder and not triggerParts[triggerOrder[step]] do step += 1 end
+			local checked = 0
+			while checked < #triggerOrder and not triggerParts[triggerOrder[step]] do
+				step += 1
+				if step > #triggerOrder then step = 1 end
+				checked += 1
+			end
 
 			local triggerBoss = nil
-			if step <= #triggerOrder and now >= nextTriggerTime then
-				triggerBoss     = triggerParts[triggerOrder[step]]
-				currentStep     = step + 1
-				nextTriggerTime = now + 1
-			elseif currentStep > #triggerOrder then
-				triggerBoss     = triggerParts[triggerOrder[1]]
-				currentStep     = 1
-				nextTriggerTime = now + 1
+			if checked < #triggerOrder and now >= nextTriggerTime then
+				triggerBoss      = triggerParts[triggerOrder[step]]
+				currentStep       = step + 1
+				nextTriggerTime   = now + 1
 			end
 
 			-- Find nearest enemy from pre-built tracked table; reuse allHRPs table
